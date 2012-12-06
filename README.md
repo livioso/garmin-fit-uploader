@@ -10,3 +10,8 @@ Usage is pretty easy:
 		> USERNAME: Your garmin connect username
 		> PASSWORD: Your garmin connect user password
 		> ACTIVITIES_FOLDER: Upload all .fit in this folder to garmin connect
+
+Requirements:
+
+  # 'mechanize' is used to automate interactions with the garmin connect site
+  $ gem install mechanize
