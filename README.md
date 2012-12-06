@@ -1,4 +1,12 @@
-GarminFitFIlesUploader
+GarminFitFilesUploader
 ======================
 
-Script that can be used to upload multiple FIT files from your Garmin watch to your connect.garmin account
+Simple script that helps you uploading your activities (.fit files) to garmin connect.
+
+Usage is pretty easy:
+
+	$ GarminFitFilesUploader.rb USERNAME PASSWORD ACTIVITIES_FOLDER
+
+USERNAME: Your garmin connect username
+PASSWORD: Your garmin connect user password
+ACTIVITIES_FOLDER: Upload all .fit in this folder to garmin connect
