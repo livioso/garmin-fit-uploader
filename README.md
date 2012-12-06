@@ -7,6 +7,6 @@ Usage is pretty easy:
 
 	$ GarminFitFilesUploader.rb USERNAME PASSWORD ACTIVITIES_FOLDER
 
-USERNAME: Your garmin connect username
-PASSWORD: Your garmin connect user password
-ACTIVITIES_FOLDER: Upload all .fit in this folder to garmin connect
+		> USERNAME: Your garmin connect username
+		> PASSWORD: Your garmin connect user password
+		> ACTIVITIES_FOLDER: Upload all .fit in this folder to garmin connect
