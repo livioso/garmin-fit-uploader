@@ -6,8 +6,8 @@
 require 'mechanize'
 
 begin
-	username = ARGV[0] or raise('Please provide the username for your garmin account')
-	password = ARGV[1] or raise("Please provide the password for '#{username}'")
+  username = ARGV[0] or raise('Please provide the username for your garmin account')
+  password = ARGV[1] or raise("Please provide the password for '#{username}'")
   folder = ARGV[2] or raise('Please provide a folder which should be used to uploaded FIT files')
 
   agentGarmin = Mechanize.new { |agent|
