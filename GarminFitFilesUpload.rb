@@ -23,6 +23,11 @@ begin
     end.submit
 
   Dir.glob("#{folder}/*.fit") do |eachFile|
+
+    # Upload files only once and flag them afterwards
+    uploadedFlagFile = "#{eachFile.to_s}.uploaded"
+    next if File.exists?(uploadedFlagFile)
+
     puts "Processing #{eachFile.to_s} ..."
     # Upload a single fit file
     agentGarmin.get('http://connect.garmin.com/api/upload/widget/manualUpload.faces') do |pageUpload|
@@ -34,6 +39,7 @@ begin
         upload_form.file_uploads.first.file_name = eachFile.to_s
       end.submit
     end
+    File.new(uploadedFlagFile, "w")
   end
 end
 rescue Exception => e
