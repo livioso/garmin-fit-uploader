@@ -14,13 +14,23 @@ begin
     agent.follow_meta_refresh = true
   }
 
-  # We have to be logged in to upload stuff
-  agentGarmin.get('http://connect.garmin.com/') do |pageGarmin|
-    signInPage = agentGarmin.click(pageGarmin.link_with(:text => 'Sign In'))
-    homePage = signInPage.form_with(:name => 'login') do |login_form|
-      login_form["login:loginUsernameField"] = username
-      login_form["login:password"] = password
-    end.submit
+  # we have to be logged in to upload stuff
+  agentGarmin.get('https://sso.garmin.com/sso/login?
+    service=http%3A%2F%2Fconnect.garmin.com%2Fpost-auth%2Flogin&
+    webhost=olaxpw-connect02.garmin.com&source=http%3A%2F%2Fconnect.garmin.com%2Fen-US%2Fsignin&
+    redirectAfterAccountLoginUrl=http%3A%2F%2Fconnect.garmin.com%2Fpost-auth%2Flogin&
+    redirectAfterAccountCreationUrl=http%3A%2F%2Fconnect.garmin.com%2Fpost-auth%2Flogin&
+    gauthHost=https%3A%2F%2Fsso.garmin.com%2Fsso&locale=en_US&id=gauth-widget&
+    cssUrl=https%3A%2F%2Fstatic.garmincdn.com%2Fcom.garmin.connect%2Fui%2Fcss%2Fgauth-custom-v1.0-min.css&clientId=GarminConnect&
+    rememberMeShown=true&rememberMeChecked=false&createAccountShown=true&openCreateAccount=false&
+    usernameShown=true&displayNameShown=false&consumeServiceTicket=false&initialFocus=true&embedWidget=false#')
+
+  form = agentGarmin.page.forms.first
+
+  # fill in user login and submit form
+  form["username"] = username
+  form["password"] = password
+  form.submit
 
   Dir.glob("#{folder}/*.fit") do |eachFile|
 
@@ -41,7 +51,6 @@ begin
     end
     File.new(uploadedFlagFile, "w")
   end
-end
 rescue Exception => e
 	puts " => #{e.message} #{e.backtrace.inspect}"
 end
