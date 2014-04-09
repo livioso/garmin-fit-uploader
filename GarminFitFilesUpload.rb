@@ -11,7 +11,14 @@ begin
   folder = ARGV[2] or raise('Please provide a folder which should be used to uploaded FIT files')
 
   agentGarmin = Mechanize.new { |agent|
-    agent.follow_meta_refresh = true
+    agent.follow_meta_refresh = true,
+    agent.ssl_version = 'SSLv3',
+
+    # Notice that I use OpenSSL::SSL::VERIFY_NONE. 
+    # That means you are theoretically vulnerable to 
+    # man-in-the-middle attack, but that's not something 
+    # I worry too much in this particular case
+    agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
   }
 
   # we have to be logged in to upload stuff
